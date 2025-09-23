@@ -6,7 +6,7 @@ import GlobalStyles from "../app/styles/global-styles.js";
 
 export function TitleSection({ title, style }) {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container]}>
       <Text style={GlobalStyles.title}>{title}</Text>
     {/*}  {onPress && (
         <TouchableOpacity onPress={onPress}>*/}
@@ -23,10 +23,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 12,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: Colors.neutral900,
   },
 });

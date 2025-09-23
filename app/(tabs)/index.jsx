@@ -1,5 +1,4 @@
-import { FlatList, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList, View, StyleSheet} from "react-native";
 import GlobalStyles from "../styles/global-styles";
 import { HeroSection } from "../../components/Hero.jsx";
 import { LastRankingsSection } from "../../components/LastRankings.jsx";
@@ -17,6 +16,7 @@ export default function HomeScreen() {
   return (
     <View style={GlobalStyles.container}>
       <FlatList
+        style={styles.homeContainer}
         data={sections}
         renderItem={({ item }) => <View>{item.component}</View>}
         keyExtractor={(item) => item.key}
@@ -26,3 +26,13 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+
+  homeContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  }
+
+})

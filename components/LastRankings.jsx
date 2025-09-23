@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Colors from "../app/styles/colors";
 import { TitleSection } from "./TitleSection";
@@ -22,9 +21,6 @@ export function LastRankingsSection() {
       </View>
     </View>
   );
-
-  {/*const navigation = useNavigation();
-  const handleSeeMore = () => navigation.navigate("Rankings");*/}
 
   return (
     <View>
@@ -57,7 +53,7 @@ const styles = StyleSheet.create({
   },
   position: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "MontserratBold", // sobrescreve p/ bold
     width: 30,
     textAlign: "center",
     color: Colors.neutral900,
@@ -68,12 +64,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "600",
+    fontFamily: "MontserratSemiBold", // peso médio-forte
     color: Colors.primary900,
   },
   points: {
     fontSize: 14,
     color: Colors.neutral800,
-    fontWeight: 500,
+    fontFamily: "MontserratMedium", // menos ênfase que o nome
   },
 });

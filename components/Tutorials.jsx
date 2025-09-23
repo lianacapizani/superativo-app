@@ -1,5 +1,3 @@
-// components/TutorialsSection.js
-import { useNavigation } from "@react-navigation/native";
 import {
   FlatList,
   Image,
@@ -9,8 +7,8 @@ import {
   View,
 } from "react-native";
 import Colors from "../app/styles/colors";
-import GlobalStyles from "../app/styles/global-styles";
 import { TitleSection } from "./TitleSection";
+import GlobalStyles from "../app/styles/global-styles";
 
 const tutorialsData = [
   { id: "1", title: "Aquecimento", duration: "5 min", image: require("../assets/images/aquecimento.png") },
@@ -22,7 +20,6 @@ const tutorialsData = [
 ];
 
 export function TutorialsSection() {
-
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card}>
       {item.image && (
@@ -77,12 +74,13 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   cardTitle: {
-    fontSize: 12,
-    fontWeight: "500",
+    fontSize: 13,
     textAlign: "center",
+    fontFamily: "MontserratSemiBold", 
+    color: Colors.primary800,
   },
   cardSubtitle: {
-    fontSize: 10,
+    fontSize: 11,
     color: "#666",
     textAlign: "center",
   },

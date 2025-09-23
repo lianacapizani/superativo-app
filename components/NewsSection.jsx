@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import {
   FlatList,
   Image,
@@ -17,7 +16,7 @@ const noticias = [
     descricao:
       "Alunos que participam de esportes escolares apresentam melhor desempenho acadêmico e maior engajamento.",
     categoria: "Educação",
-    visualizacoes: "2.5k",
+    visualizacoes: "1k",
     imagem: require("../assets/images/noticia1.jpg"),
   },
   {
@@ -26,7 +25,7 @@ const noticias = [
     descricao:
       "O torneio incentiva espírito esportivo, trabalho em equipe e integração entre escolas participantes.",
     categoria: "Esportes",
-    visualizacoes: "1.8k",
+    visualizacoes: "1.7k",
     imagem: require("../assets/images/noticia2.jpg"),
   },
   {
@@ -41,7 +40,6 @@ const noticias = [
 ];
 
 export function NewsSection() {
-
   return (
     <View style={styles.container}>
       <TitleSection title="Notícias" />
@@ -82,7 +80,6 @@ export function NewsSection() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
@@ -104,12 +101,13 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "MontserratSemiBold", // sobrescreve o default
   },
   descricao: {
     fontSize: 14,
     color: "#555",
-    marginTop: 2,
+    marginTop: 4,
+    // usa MontserratRegular automaticamente (default)
   },
   meta: {
     flexDirection: "row",
@@ -118,15 +116,17 @@ const styles = StyleSheet.create({
   categoria: {
     marginRight: 12,
     color: Colors.secondary900,
-    fontWeight: "600",
+    fontFamily: "MontserratSemiBold",
   },
   views: {
-    color: "#777",
+    color: "#454545ff",
+    // já vem MontserratRegular
   },
   verMaisLink: {
-    fontSize: 14,
-    color: "#007AFF",
+    fontSize: 11,
+    color: "#003166ff",
     textDecorationLine: "underline",
-    marginLeft: 8,
+    marginLeft: 2,
+    fontFamily: "MontserratLight",
   },
 });

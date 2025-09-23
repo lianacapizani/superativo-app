@@ -3,29 +3,25 @@ import Colors from "./colors";
 import Typography from "./typography";
 
 const GlobalStyles = StyleSheet.create({
-  // Layout base
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
   },
 
-  // Textos
   title: {
-    fontFamily: Typography.bold,
-    fontSize: 22,
+    fontFamily: Typography.semibold,
+    fontSize: 20,
     color: Colors.primary800,
-    marginBottom:20,
+    marginBottom:8,
   },
   subtitle: {
     fontFamily: Typography.regular,
     fontSize: 16,
-    color: Colors.primary750,
+    color: Colors.neutral800,
     marginBottom:16,
   },
   paragraph: {
-    fontFamily: Typography.regular,
+    fontFamily: Typography.light,
     fontSize: 16,
     color: Colors.primary500,
     lineHeight: 22,
