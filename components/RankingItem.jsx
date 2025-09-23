@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import Colors from "../app/styles/colors";
 
-// Função que converte número em ordinal (1 → 1º, 2 → 2º, etc.)
 function formatOrdinal(num) {
   return `${num}º`;
 }
@@ -50,11 +49,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     paddingVertical: 4,
   },
-  // Medalhas
   ouro: {
     backgroundColor: "#f2cb06ff",
     color: "#fff",
-
 
   },
   prata: {

@@ -62,7 +62,6 @@ export default function MyClassScreen() {
       style={GlobalStyles.container}
       contentContainerStyle={{ paddingBottom: 24 }}
     >
-      {/* HERO */}
       <View style={styles.hero}>
         <Image
           source={require("../../assets/images/fulana2.png")}
@@ -90,7 +89,7 @@ export default function MyClassScreen() {
         </View>
       </View>
 
-      {/* BALANÇO */}
+  
       <Text style={styles.sectionTitle}>Meu balanço de pontos</Text>
       {pointsData.map((p) => (
         <PointsCard
@@ -100,13 +99,11 @@ export default function MyClassScreen() {
           transactions={p.transactions}
         />
       ))}
-
-      {/* TOTAL */}
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>Total: {total}</Text>
       </View>
 
-      {/* CALENDÁRIO */}
+
       <Text style={styles.sectionTitle}>Calendário</Text>
       <Calendar
         style={styles.calendar}
@@ -123,7 +120,7 @@ export default function MyClassScreen() {
         }}
       />
 
-      {/* SINCRONIZE */}
+     
       <View style={styles.syncCard}>
         <Text style={styles.cardTitle}>Sincronize seus dispositivos</Text>
         <Text style={styles.syncSubtitle}>
@@ -131,7 +128,7 @@ export default function MyClassScreen() {
           aplicativos que monitoram seus exercícios.
         </Text>
 
-        {/* Botões */}
+   
         <View
           style={{
             flexDirection: "row",

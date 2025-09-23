@@ -44,6 +44,14 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+     "extra": {
+      "FIREBASE_API_KEY": "AIzaSyCZEiYg7N8_MniHVrKjg_zAYnd2PsEhaVs",
+      "FIREBASE_AUTH_DOMAIN": "superativoapp.firebaseapp.com",
+      "FIREBASE_PROJECT_ID": "superativoapp",
+      "FIREBASE_STORAGE_BUCKET": "superativoapp.firebasestorage.app",
+      "FIREBASE_MESSAGING_SENDER_ID": "320447428218",
+      "FIREBASE_APP_ID": "1:320447428218:web:9da3e70ba5a74e16b52dc3"
     }
   }
 }

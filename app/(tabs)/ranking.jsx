@@ -3,21 +3,20 @@ import GlobalStyles from "../styles/global-styles";
 import Colors from "../styles/colors";
 import RankingItem from "../../components/RankingItem";
 import Typography from "../styles/typography";
-
-const alunos = [
-  { id: "1", nome: "Ana Clara", pontos: 980 },
-  { id: "2", nome: "João Pedro", pontos: 920 },
-  { id: "3", nome: "Mariana Silva", pontos: 880 },
-  { id: "4", nome: "Lucas Santos", pontos: 860 },
-  { id: "5", nome: "Beatriz Oliveira", pontos: 850 },
-  { id: "6", nome: "Rafael Almeida", pontos: 830 },
-  { id: "7", nome: "Camila Ferreira", pontos: 800 },
-  { id: "8", nome: "Mateus Costa", pontos: 780 },
-  { id: "9", nome: "Gabriela Rocha", pontos: 760 },
-  { id: "10", nome: "Felipe Lima", pontos: 740 },
-];
+import { useState, useEffect } from "react";
+import { buscarRanking } from "../../services/rankingService";
 
 export default function RankingScreen() {
+  const [alunos, setAlunos] = useState([]);
+
+  useEffect(() => {
+    async function carregarRanking() {
+      const dados = await buscarRanking();
+      setAlunos(dados);
+    }
+    carregarRanking();
+  }, []);
+
   return (
     <View style={GlobalStyles.container}>
       {/* HERO */}
