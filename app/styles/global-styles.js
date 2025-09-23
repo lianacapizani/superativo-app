@@ -30,30 +30,30 @@ const GlobalStyles = StyleSheet.create({
   // Botão primário
   buttonPrimary: {
     backgroundColor: Colors.primary500,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
     borderRadius: 8,
     alignItems: "center",
-    marginTop: 16,
+    marginTop: 8,
   },
   buttonPrimaryText: {
-    fontFamily: Typography.bold,
-    fontSize: 16,
+    fontFamily: Typography.semibold,
+    fontSize: 14,
     color: "#fff",
   },
 
   // Botão secundário
   buttonSecondary: {
     backgroundColor: Colors.secondary500,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
     borderRadius: 8,
     alignItems: "center",
-    marginTop: 16,
+    marginTop: 8,
   },
   buttonSecondaryText: {
-    fontFamily: Typography.bold,
-    fontSize: 16,
+    fontFamily: Typography.semibold,
+    fontSize: 14,
     color: "#fff",
   },
 
