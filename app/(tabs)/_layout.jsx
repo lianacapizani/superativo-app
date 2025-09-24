@@ -12,13 +12,18 @@ export default function TabLayout() {
         tabBarInactiveTintColor: Colors.neutral900,
         tabBarStyle: {
           backgroundColor: Colors.neutral100,
+          height:65,
+        },
+          tabBarLabelStyle: {
+          fontFamily: "MontserratSemiBold",
+          fontSize: 12, // ajusta se quiser menor/maior
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Página Inicial",
+          title: "Inicio",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
@@ -31,7 +36,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="ranking"
         options={{
-          title: "Ranking Geral",
+          title: "Ranking",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "trophy-sharp" : "trophy-outline"}
@@ -44,7 +49,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="myclass"
         options={{
-          title: "Minha Turma",
+          title: "Turma",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "people-sharp" : "people-outline"}
@@ -57,7 +62,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Meu Perfil",
+          title: "Perfil",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "person-sharp" : "person-outline"}

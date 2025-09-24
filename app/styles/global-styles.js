@@ -6,6 +6,7 @@ const GlobalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
+    paddingBottom: 8,
   },
 
   title: {
