@@ -37,8 +37,8 @@ const generalRanking = [
 ];
 
 const myClassRanking = [
-  { id: "1", nome: "Pedro Henrique", pontos: 620 },
-  { id: "2", nome: "Larissa Souza", pontos: 590 },
+  { id: "1", nome: "Lucas Santos", pontos: 860 },
+  { id: "2", nome: "Camila Ferreira", pontos: 800 },
   { id: "3", nome: "Thiago Ramos", pontos: 570 },
 ];
 

@@ -6,7 +6,7 @@ const GlobalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
-    paddingBottom: 8,
+    paddingBottom: 2,
   },
 
   title: {
@@ -32,7 +32,7 @@ const GlobalStyles = StyleSheet.create({
   buttonPrimary: {
     backgroundColor: Colors.primary500,
     paddingVertical: 8,
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
     borderRadius: 8,
     alignItems: "center",
     marginTop: 8,
@@ -47,7 +47,7 @@ const GlobalStyles = StyleSheet.create({
   buttonSecondary: {
     backgroundColor: Colors.secondary500,
     paddingVertical: 8,
-    paddingHorizontal: 8,
+    paddingHorizontal:16,
     borderRadius: 8,
     alignItems: "center",
     marginTop: 8,

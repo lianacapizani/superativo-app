@@ -72,12 +72,13 @@ export default function MyClassScreen() {
           <Text style={GlobalStyles.title}>Nome da Fulana</Text>
           <View style={styles.row}>
             <Ionicons
-              name="calendar-outline"
+              name="trophy-outline"
               size={16}
               color={Colors.primary750}
             />
-            <Text style={styles.subtitle}>01/01/2000</Text>
+            <Text style={styles.subtitle}>Classificação Geral: 7º</Text>
           </View>
+
           <View style={styles.row}>
             <Ionicons
               name="people-outline"
@@ -89,7 +90,6 @@ export default function MyClassScreen() {
         </View>
       </View>
 
-  
       <Text style={styles.sectionTitle}>Meu balanço de pontos</Text>
       {pointsData.map((p) => (
         <PointsCard
@@ -102,7 +102,6 @@ export default function MyClassScreen() {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>Total: {total}</Text>
       </View>
-
 
       <Text style={styles.sectionTitle}>Calendário</Text>
       <Calendar
@@ -120,7 +119,6 @@ export default function MyClassScreen() {
         }}
       />
 
-     
       <View style={styles.syncCard}>
         <Text style={styles.cardTitle}>Sincronize seus dispositivos</Text>
         <Text style={styles.syncSubtitle}>
@@ -128,7 +126,6 @@ export default function MyClassScreen() {
           aplicativos que monitoram seus exercícios.
         </Text>
 
-   
         <View
           style={{
             flexDirection: "row",
@@ -146,7 +143,7 @@ export default function MyClassScreen() {
               </Text>
             </Text>
           </View>
-          <View style={{ flex: 1, marginLeft: 8 }}>
+          <View style={{ flex: 1, marginLeft: 16 }}>
             <Text
               style={GlobalStyles.buttonSecondary}
               onPress={() => console.log("Adicionar Dispositivos")}
