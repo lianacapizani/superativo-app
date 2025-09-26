@@ -21,16 +21,17 @@ export default function RootLayout() {
   });
 
   if (!fontsLoaded) {
-    return <Text>Carregando fontes...</Text>; // pode trocar por splash bonito
+    return <Text>Carregando fontes...</Text>; 
   }
 
-  // 👉 Aqui definimos fonte global para TODOS os <Text>
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.style = { fontFamily: "MontserratRegular" };
 
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="Login" options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" options={{ headerShown: false }} />
     </Stack>
   );
 }

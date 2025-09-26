@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import Colors from "../app/styles/colors";
-import { TitleSection } from "./TitleSection";
 import GlobalStyles from "../app/styles/global-styles";
 
 const tutorialsData = [
@@ -36,11 +35,18 @@ export function TutorialsSection() {
 
   return (
     <View style={styles.container}>
-      <TitleSection title="Tutoriais" />
+      <View style={styles.header}>
+        <Text style={GlobalStyles.title}>Tutoriais</Text>
+        <TouchableOpacity>
+          <Text style={styles.verMais}>Ver mais</Text>
+        </TouchableOpacity>
+      </View>
+
       <Text style={GlobalStyles.subtitle}>
         Aprenda técnicas, treinos e dicas para melhorar seu desempenho e manter
         a motivação nos esportes.
       </Text>
+
       <FlatList
         data={tutorialsData}
         renderItem={renderItem}
@@ -56,6 +62,17 @@ export function TutorialsSection() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+  },
+  header: {
+  flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  verMais: {
+    fontSize: 12,
+    fontFamily: "MontserratRegular",
+    color: Colors.primary750,
   },
   listContent: {
     paddingRight: 16,

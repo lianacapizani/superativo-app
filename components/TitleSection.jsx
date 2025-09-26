@@ -1,18 +1,10 @@
-// TitleWithChevron.js
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Colors from "../app/styles/colors";
+import { StyleSheet, Text, View } from "react-native";
 import GlobalStyles from "../app/styles/global-styles.js";
 
-export function TitleSection({ title, style }) {
+export function TitleSection({ title,  }) {
   return (
     <View style={[styles.container]}>
       <Text style={GlobalStyles.title}>{title}</Text>
-    {/*}  {onPress && (
-        <TouchableOpacity onPress={onPress}>*/}
-         <TouchableOpacity>
-          <Ionicons name="chevron-forward" size={22} color={Colors.primary750} />
-        </TouchableOpacity>
     </View>
   );
 }
@@ -22,6 +14,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 12,
+    marginBottom: 10,
   },
 });

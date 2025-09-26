@@ -1,75 +1,128 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import Colors from "../app/styles/colors";
 import { TitleSection } from "./TitleSection";
 
-const lastFiveRankings = [
-  { id: "1", name: "João Silva", points: 250 },
-  { id: "2", name: "Maria Oliveira", points: 220 },
-  { id: "3", name: "Lucas Santos", points: 210 },
-  { id: "4", name: "Ana Pereira", points: 200 },
-  { id: "5", name: "Carlos Lima", points: 190 },
-];
+// Componente para renderizar cada item do ranking
+function RankingItem({ posicao, nome, pontos }) {
+  const formatOrdinal = (num) => `${num}º`;
 
-export function LastRankingsSection() {
-  const renderItem = ({ item, index }) => (
-    <View style={[styles.card, index === 0 && styles.cardTop]}>
-      <Text style={styles.position}>{index + 1}</Text>
+  const getPosicaoStyle = () => {
+    switch (posicao) {
+      case 1:
+        return [styles.posicao, styles.ouro];
+      case 2:
+        return [styles.posicao, styles.prata];
+      case 3:
+        return [styles.posicao, styles.bronze];
+      default:
+        return styles.posicao;
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={getPosicaoStyle()}>{formatOrdinal(posicao)}</Text>
       <View style={styles.info}>
-        <Text style={styles.name}>
-          {item.name} - <Text style={styles.points}>{item.points} pts</Text>
-        </Text>
+        <Text style={styles.nome}>{nome}</Text>
+        <Text style={styles.pontos}>{pontos} pts</Text>
       </View>
     </View>
   );
+}
 
+const generalRanking = [
+  { id: "1", nome: "Ana Clara", pontos: 980 },
+  { id: "2", nome: "João Pedro", pontos: 920 },
+  { id: "3", nome: "Mariana Silva", pontos: 880 },
+];
+
+const myClassRanking = [
+  { id: "1", nome: "Pedro Henrique", pontos: 620 },
+  { id: "2", nome: "Larissa Souza", pontos: 590 },
+  { id: "3", nome: "Thiago Ramos", pontos: 570 },
+];
+
+function RankingList({ title, data }) {
   return (
-    <View>
-      <TitleSection title="Últimos Rankings" />
+    <View style={{ marginVertical: 4 }}>
+      <Text style={styles.sectionTitle}>{title}</Text>
       <FlatList
-        data={lastFiveRankings}
-        renderItem={renderItem}
+        data={data}
+        renderItem={({ item, index }) => (
+          <RankingItem
+            posicao={index + 1}
+            nome={item.nome}
+            pontos={item.pontos}
+          />
+        )}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
+        scrollEnabled={false}
       />
     </View>
   );
 }
 
+export function LastRankingsSection() {
+  return (
+    <View>
+      <TitleSection title="Últimos Rankings" />
+      <RankingList title="Geral" data={generalRanking} />
+      <RankingList title="Minha Turma" data={myClassRanking} />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  card: {
+  sectionTitle: {
+    fontSize: 16,
+    fontFamily: "MontserratBold",
+    marginBottom: 8,
+    color: Colors.neutral900,
+  },
+  container: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.neutral100,
-    padding: 4,
-    marginBottom: 10,
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
-    elevation: 2,
+    backgroundColor: Colors.neutral50,
+    padding: 6,
+    borderRadius: 10,
+    marginBottom: 8,
   },
-  cardTop: {
-    backgroundColor: Colors.secondary50,
-  },
-  position: {
-    fontSize: 18,
-    fontFamily: "MontserratBold", // sobrescreve p/ bold
-    width: 30,
+  posicao: {
+    fontSize: 14,
+    fontFamily: "MontserratBold",
+    color: Colors.primary750,
+    width: 25,
     textAlign: "center",
-    color: Colors.neutral900,
+    borderRadius: 50,
+    overflow: "hidden",
+    paddingVertical: 4,
+  },
+  ouro: {
+    backgroundColor: "#f2cb06ff",
+    color: "#fff",
+  },
+  prata: {
+    backgroundColor: "#b1b1b1ff",
+    color: "#fff",
+  },
+  bronze: {
+    backgroundColor: "#c06f1eff",
+    color: "#fff",
   },
   info: {
     marginLeft: 12,
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  name: {
-    fontSize: 16,
-    fontFamily: "MontserratSemiBold", // peso médio-forte
+  nome: {
+    fontFamily: "MontserratMedium",
+    fontSize: 15,
     color: Colors.primary900,
   },
-  points: {
-    fontSize: 14,
-    color: Colors.neutral800,
-    fontFamily: "MontserratMedium", // menos ênfase que o nome
+  pontos: {
+    fontSize: 12,
+    fontFamily: "MontserratSemiBold",
+    color: Colors.secondary900,
   },
 });

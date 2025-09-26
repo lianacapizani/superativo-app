@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   posicao: {
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: "MontserratBold", 
     color: Colors.primary750,
-    width: 30,
+    width: 28,
     textAlign: "center",
     borderRadius: 50,
     overflow: "hidden",

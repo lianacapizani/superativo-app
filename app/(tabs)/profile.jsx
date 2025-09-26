@@ -1,5 +1,5 @@
 import { Feather, MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import {
   ScrollView,
   Text,
@@ -12,16 +12,16 @@ import MenuItem from "../../components/MenuItem";
 import Colors from "../styles/colors";
 
 export default function ProfileScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.loginBox}>
         <Text style={styles.loginText}>Não está logado?</Text>
         <TouchableOpacity
           style={styles.loginButton}
-          onPress={() => navigation.navigate("Login")}
-        >
+          onPress={() => router.push("/Login")}
+    >
           <Text style={styles.loginButtonText}>ENTRAR</Text>
         </TouchableOpacity>
       </View>
@@ -30,27 +30,27 @@ export default function ProfileScreen() {
         <MenuItem
           icon={<Feather name="user" size={20} color="#016DAD" />}
           text="Meu Perfil"
-          onPress={() => navigation.navigate("Perfil")}
+          onPress={() => router.push("Perfil")}
         />
         <MenuItem
           icon={<Feather name="users" size={20} color="#016DAD" />}
           text="Minha Turma"
-          onPress={() => navigation.navigate("MinhaTurma")}
+          onPress={() => router.push("MinhaTurma")}
         />
         <MenuItem
           icon={<Feather name="award" size={20} color="#016DAD" />}
           text="Ranking da Turma"
-          onPress={() => navigation.navigate("Ranking")}
+          onPress={() => router.push("Ranking")}
         />
         <MenuItem
           icon={<Feather name="activity" size={20} color="#016DAD" />}
           text="Pontos de Saúde"
-          onPress={() => navigation.navigate("PontosSaude")}
+          onPress={() => router.push("PontosSaude")}
         />
         <MenuItem
           icon={<Feather name="calendar" size={20} color="#016DAD" />}
           text="Calendário de Atividades"
-          onPress={() => navigation.navigate("Calendario")}
+          onPress={() => router.push("Calendario")}
         />
         <MenuItem
           icon={
@@ -61,20 +61,20 @@ export default function ProfileScreen() {
             />
           }
           text="Cupons & Recompensas"
-          onPress={() => navigation.navigate("Cupons")}
+          onPress={() => router.push("Cupons")}
         />
         <MenuItem
           icon={<Feather name="file-text" size={20} color="#016DAD" />}
           text="Regras & Pontuação"
-          onPress={() => navigation.navigate("RegrasPontuacao")}
+          onPress={() => router.push("RegrasPontuacao")}
         />
         <MenuItem
           icon={<Feather name="message-circle" size={20} color="#016DAD" />}
           text="Ajuda & Suporte"
-          onPress={() => navigation.navigate("Ajuda")}
+          onPress={() => router.push("Ajuda")}
         />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   loginBox: {
-    padding: 24,
+    padding: 30,
     alignItems: "center",
     backgroundColor: "#f5f5f5",
   },

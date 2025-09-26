@@ -12,7 +12,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: Colors.neutral900,
         tabBarStyle: {
           backgroundColor: Colors.neutral100,
-          height:65,
+          height:70,
         },
           tabBarLabelStyle: {
           fontFamily: "MontserratSemiBold",
