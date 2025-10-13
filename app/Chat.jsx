@@ -1,35 +1,61 @@
-
 import React, { useState, useRef, useEffect } from "react";
-import { View, TextInput, TouchableOpacity, Text, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { sendMessageToWatson } from "../services/watsonService";
-export default function ChatScreen() {
+import { sendMessageToWatson, resetConversation } from "../services/watsonService";
+
+export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef();
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
+  // Função para enviar mensagem do usuário
+  const sendMessage = async (msg) => {
+    if (!msg.trim()) return;
 
-    const userMsg = { from: "user", text: input };
+    const userMsg = { from: "user", text: msg };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
 
     try {
-      const response = await sendMessageToWatson(input);
-      const watsonText = response.output_text || "Sem resposta 😅";
-      setMessages((prev) => [...prev, { from: "watson", text: watsonText }]);
+      const response = await sendMessageToWatson(msg);
+      const watsonText = response.watsonText || "Sem resposta 😅";
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          from: "watson",
+          text: watsonText,
+          actions: response.actions || [],
+        },
+      ]);
     } catch (err) {
       console.error(err);
-      setMessages((prev) => [...prev, { from: "watson", text: "Erro ao conectar com o Watson 😢" }]);
+      setMessages((prev) => [
+        ...prev,
+        { from: "watson", text: "Erro ao conectar com o Watson 😢" },
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Scroll automático para a última mensagem
+  // Função ao clicar em um botão de action
+  const handleAction = (actionValue) => {
+    sendMessage(actionValue);
+  };
+
+  // Scroll para o fim da conversa
   useEffect(() => {
     scrollRef.current?.scrollToEnd({ animated: true });
   }, [messages]);
@@ -56,6 +82,21 @@ export default function ChatScreen() {
             <Text style={m.from === "user" ? styles.userText : styles.watsonText}>
               {m.text}
             </Text>
+
+            {/* Renderiza actions como botões */}
+            {m.actions && m.actions.length > 0 && (
+              <View style={styles.actionsContainer}>
+                {m.actions.map((a, idx) => (
+                  <TouchableOpacity
+                    key={idx}
+                    style={styles.actionButton}
+                    onPress={() => handleAction(a.value)}
+                  >
+                    <Text style={styles.actionText}>{a.title}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
           </View>
         ))}
       </ScrollView>
@@ -68,7 +109,11 @@ export default function ChatScreen() {
           placeholderTextColor="#999"
           style={styles.textInput}
         />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton} disabled={loading}>
+        <TouchableOpacity
+          onPress={() => sendMessage(input)}
+          style={styles.sendButton}
+          disabled={loading}
+        >
           <Ionicons name="send" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
@@ -89,6 +134,20 @@ const styles = StyleSheet.create({
   watsonBubble: { backgroundColor: "#1E1E1E", alignSelf: "flex-start", borderTopLeftRadius: 0 },
   userText: { color: "#fff", fontSize: 16 },
   watsonText: { color: "#fff", fontSize: 16 },
+  actionsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 8,
+  },
+  actionButton: {
+    backgroundColor: "#333",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 16,
+    marginRight: 8,
+    marginTop: 5,
+  },
+  actionText: { color: "#fff", fontSize: 14 },
   inputContainer: {
     flexDirection: "row",
     padding: 10,

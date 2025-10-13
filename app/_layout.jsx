@@ -21,7 +21,7 @@ export default function RootLayout() {
   });
 
   if (!fontsLoaded) {
-    return <Text>Carregando fontes...</Text>; 
+    return <Text>Aguarde uns instantes...Carregando fontes...</Text>; 
   }
 
   Text.defaultProps = Text.defaultProps || {};
