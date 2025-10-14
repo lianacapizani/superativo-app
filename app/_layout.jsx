@@ -10,6 +10,10 @@ import {
 } from "@expo-google-fonts/montserrat";
 import { Text } from "react-native";
 
+// Ajuste global da fonte
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.style = { fontFamily: "MontserratRegular" };
+
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     MontserratThin: Montserrat_100Thin,
@@ -21,17 +25,19 @@ export default function RootLayout() {
   });
 
   if (!fontsLoaded) {
-    return <Text>Aguarde uns instantes...Carregando fontes...</Text>; 
+    return <Text>Carregando fontes...</Text>;
   }
 
-  Text.defaultProps = Text.defaultProps || {};
-  Text.defaultProps.style = { fontFamily: "MontserratRegular" };
-
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="Login" options={{ headerShown: false }} />
-      <Stack.Screen name="SignUp" options={{ headerShown: false }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      {/* As rotas abaixo só funcionam se os arquivos existirem em app/ */}
+      <Stack.Screen name="index" />
+      <Stack.Screen name="aluno/login" />
+      <Stack.Screen name="professor/login" />
+      <Stack.Screen name="aluno/(tabs)" />
+      <Stack.Screen name="professor/(tabs)" />
+      <Stack.Screen name="SignUp" />
+      <Stack.Screen name="professor/[turmaId]" />
     </Stack>
   );
 }

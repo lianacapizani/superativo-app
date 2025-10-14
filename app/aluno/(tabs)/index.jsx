@@ -1,9 +1,9 @@
 import { FlatList, View, StyleSheet} from "react-native";
-import GlobalStyles from "../styles/global-styles";
-import { HeroSection } from "../../components/Hero.jsx";
-import { LastRankingsSection } from "../../components/LastRankings.jsx";
-import { NewsSection } from "../../components/NewsSection.jsx";
-import { TutorialsSection } from "../../components/Tutorials.jsx";
+import GlobalStyles from "../../styles/global-styles";
+import { HeroSection } from "../../../components/Hero.jsx";
+import { LastRankingsSection } from "../../../components/LastRankings.jsx";
+import { NewsSection } from "../../../components/NewsSection.jsx";
+import { TutorialsSection } from "../../../components/Tutorials.jsx";
 
 export default function HomeScreen() {
   const sections = [
