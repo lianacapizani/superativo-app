@@ -13,49 +13,50 @@ Aplicativo mobile desenvolvido com React Native + Expo Router, focado em treinos
 ## 📂 Estrutura
 
 ```
-app/(tabs)/index.jsx       → HomeScreen
-app/(tabs)/ranking.jsx     → RankingScreen
-app/(tabs)/myclass.jsx     → MyClassScreen
-app/(auth)/Login.jsx       → LoginScreen (Firebase Auth)
-app/(auth)/SignUp.jsx      → Cadastro de usuário (Firebase Auth)
-components/                → Componentes reutilizáveis (SocialLogin, HeaderBar etc.)
-app/styles/                → Estilos globais (cores, tipografia, layouts)
-services/firebase.js       → Configuração e export do Firebase
-```
+app/
+┣ aluno/ → Área do Aluno
+┃ ┣ (tabs)/ → Home, Minha Turma, Profile, Ranking
+┃ ┗ login.jsx
+┣ professor/ → Área do Professor
+┃ ┣ (tabs)/ → Home, Profile, Ranking, Turmas
+┃ ┗ [turmaId]/ → Presença e Estatísticas
+┣ styles/ → Chat, SignUp, layouts e cores
+components/ → Componentes reutilizáveis
+services/ → Configuração Firebase e ranking
+assets/ → Imagens e ícones
 
+```
 
 ## ⚡ Funcionalidades
 
-### Login e Cadastro de Usuário
-- Autenticação via **Firebase Auth** (email e senha)  
-- Ícone de **visualizar/ocultar senha** nos inputs  
-- Mensagens de erro claras (senha fraca, e-mail inválido, usuário não encontrado, etc.)  
+### Área do Professor
+- Gerenciar turmas e alunos  
+- Marcar presença e controlar pontuação (+ / –)  
+- Visualizar estatísticas: frequência, média de pontos, total de presentes  
+- **Ranking do professor:** ajuste de pontos, visualização de todos os alunos, posições e níveis  
+
+### Área do Aluno
+- Visualizar pontuação, progresso e ranking  
+- **Ranking do aluno:** ver sua posição individual, ranking geral e da turma  
+- Chat de suporte: tirar dúvidas sobre o app, rankings, treinos personalizados e outros suportes  
 
 ### Ranking
-- Tela de ranking de usuários por pontos  
-- Visualização de posição, nome, pontuação e data  
-- Tipografia consistente (Montserrat)  
+- Distinto para cada perfil:  
+  - **Aluno:** somente visualização da própria posição e ranking da turma  
+  - **Professor:** controle completo de pontos, presença e visualização de todos os alunos  
 
-### Minha Turma / MyClassScreen
-- Visualização de pontos acumulados  
-- Agenda de aulas e calendário integrado  
+### Geral
+- Autenticação via Firebase (email/senha e login social)  
+- Paleta de cores personalizada e tipografia Montserrat  
+- Dados sincronizados em tempo real via Firestore  
 
-### HomeScreen
-- Tela inicial com resumo de atividades  
-- Acesso rápido às outras tabs  
-
-### Social Login
-- Componentes para login via redes sociais  
-
-### Estilos Globais
-- Paleta de cores personalizada (azul, verde, neutros)  
-- Tipografia Montserrat carregada via Expo Google Fonts  
-- Componentes reutilizáveis com Styled Components e StyleSheet  
-
-### Firebase Firestore
-- Armazenamento de dados de usuários e pontos  
-- Sincronização de ranking e progresso em tempo real  
-
+## 🛠️ Como rodar
+```bash
+git clone https://github.com/lianacapizani/superativo-app.git
+cd superativo-app
+npm install # ou yarn install
+npx expo start
+```
 
 ## 🛠️ Como rodar
 
@@ -70,4 +71,7 @@ npx expo start
 - O app utiliza Firebase Auth para autenticação de usuários (login e cadastro).
 - As senhas podem ser exibidas ou ocultadas nos inputs com o ícone de olho.
 - O Firebase Firestore é usado para armazenar dados de usuários, pontos e ranking.
+- Botões de + / – pontos e presença próximos para facilitar o uso do professor.
+- Chat do aluno centraliza dúvidas, suporte e orientação personalizada.
+- Estrutura modular separa claramente área do aluno e área do professor, facilitando manutenção e escalabilidade.
 
