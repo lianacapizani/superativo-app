@@ -129,13 +129,13 @@ export default function Cadastro() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={handleCadastro}>
+        <TouchableOpacity style={styles.button} onPress={() => router.replace("/")}>
           <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
 
         <SocialLogin />
 
-        <TouchableOpacity onPress={() => router.push("/Login")}>
+        <TouchableOpacity onPress={() => router.push("/")}>
           <Text style={styles.signupLink}>Já possui conta? Voltar ao login</Text>
         </TouchableOpacity>
       </ScrollView>

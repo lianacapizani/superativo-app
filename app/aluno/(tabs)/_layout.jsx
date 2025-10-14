@@ -1,8 +1,8 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
-import { HeaderBar } from "../../components/HeaderBar";
-import Colors from "../styles/colors";
-import { FloatingChatButton } from "../../components/FloatingChatButton"; 
+import { HeaderBar } from "../../../components/HeaderBar";
+import Colors from "../../styles/colors";
+import { FloatingChatButton } from "../../../components/FloatingChatButton"; 
 
 export default function TabLayout() {
   return (

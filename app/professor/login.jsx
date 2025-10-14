@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
-import Colors from "./styles/colors";
-import Typography from "./styles/typography";
-import { auth } from "../services/firebase";
+import Colors from "../styles/colors";
+import Typography from "../styles/typography";
+import { auth } from "../../services/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginScreen() {
@@ -50,10 +50,10 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={styles.inner}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={require("../../assets/images/logo.png")}
           style={styles.logo}
         />
-        <Text style={styles.title}>Bem-vindo!</Text>
+        <Text style={styles.title}>Bem-vindo, Professor!</Text>
 
         <TextInput
           placeholder="Email"
@@ -90,7 +90,7 @@ export default function LoginScreen() {
           <Text style={styles.checkboxLabel}>Lembrar-me</Text>
         </Pressable>
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button}onPress={() => router.push("/professor/(tabs)")}>
           <Text style={styles.buttonText}>ENTRAR</Text>
         </TouchableOpacity>
 
@@ -101,7 +101,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.backButtonContainer}
-            onPress={() => router.push("/(tabs)/profile")}
+            onPress={() => router.replace("/")}
           >
             <Text style={styles.backButtonText}>Voltar</Text>
           </TouchableOpacity>

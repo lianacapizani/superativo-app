@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
-import GlobalStyles from "../styles/global-styles";
-import Colors from "../styles/colors";
-import Typography from "../styles/typography";
+import GlobalStyles from "../../styles/global-styles";
+import Colors from "../../styles/colors";
+import Typography from "../../styles/typography";
 
 const pointsData = [
   {
@@ -64,7 +64,7 @@ export default function MyClassScreen() {
     >
       <View style={styles.hero}>
         <Image
-          source={require("../../assets/images/fulana2.png")}
+          source={require("../../../assets/images/fulana2.png")}
           style={styles.heroImage}
           resizeMode="cover"
         />

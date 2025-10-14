@@ -1,10 +1,10 @@
 import { Text, View, StyleSheet, Image, FlatList } from "react-native";
-import GlobalStyles from "../styles/global-styles";
-import Colors from "../styles/colors";
-import RankingItem from "../../components/RankingItem";
-import Typography from "../styles/typography";
+import GlobalStyles from "../../styles/global-styles";
+import Colors from "../../styles/colors";
+import RankingItem from "../../../components/RankingItem";
+import Typography from "../../styles/typography";
 import { useState, useEffect } from "react";
-import { buscarRanking } from "../../services/rankingService";
+import { buscarRanking } from "../../../services/rankingService";
 
 export default function RankingScreen() {
   const [alunos, setAlunos] = useState([]);
@@ -22,7 +22,7 @@ export default function RankingScreen() {
       {/* HERO */}
       <View style={styles.hero}>
         <Image
-          source={require("../../assets/images/ranking2.png")}
+          source={require("../../../assets/images/ranking2.png")}
           style={styles.heroImage}
         />
         <View style={styles.heroTextContainer}>

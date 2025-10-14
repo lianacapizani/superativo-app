@@ -1,30 +1,13 @@
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
-import MenuItem from "../../components/MenuItem";
-import Colors from "../styles/colors";
+import { ScrollView, View, StyleSheet } from "react-native";
+import MenuItem from "../../../components/MenuItem";
 
-export default function ProfileScreen() {
+export default function AlunoProfile() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <View style={styles.loginBox}>
-        <Text style={styles.loginText}>Não está logado?</Text>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => router.push("/Login")}
-    >
-          <Text style={styles.loginButtonText}>ENTRAR</Text>
-        </TouchableOpacity>
-      </View>
-
       <ScrollView contentContainerStyle={styles.menuList}>
         <MenuItem
           icon={<Feather name="user" size={20} color="#016DAD" />}
@@ -72,6 +55,11 @@ export default function ProfileScreen() {
           text="Ajuda & Suporte"
           onPress={() => router.push("Ajuda")}
         />
+        <MenuItem
+          icon={<Feather name="log-out" size={20} color="#016DAD" />}
+          text="Sair"
+          onPress={() => router.push("/")}
+        />
       </ScrollView>
     </View>
   );
@@ -81,33 +69,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: 10,
   },
-
-  loginBox: {
-    padding: 30,
-    alignItems: "center",
-    backgroundColor: "#f5f5f5",
-  },
-
-  loginText: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: "#4E4E4E",
-  },
-
-  loginButton: {
-    backgroundColor: Colors.secondary750,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-
-  loginButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-
   menuList: {
     paddingBottom: 24,
   },
