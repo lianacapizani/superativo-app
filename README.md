@@ -53,7 +53,7 @@ assets/ → Imagens e ícones
 ## 🛠️ Como rodar
 
 ```bash
-git clone https://github.com/seu-usuario/superativo-app.git
+git clone https://github.com/lianacapizani/superativo-app
 cd superativo-app
 npm install # ou yarn install
 npx expo start
