@@ -25,7 +25,7 @@ neutral800: "#494a50ff",
 neutral900: "#35363aff",
 
   // Background padrão
-  background: "#FFFFFF", // pode trocar pra outra se quiser
+  background: "#FFFFFF", 
 };
 
 export default Colors;
