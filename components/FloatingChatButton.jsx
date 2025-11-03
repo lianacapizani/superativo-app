@@ -1,17 +1,22 @@
-import { useRouter } from "expo-router";
+import { useState } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import ChatOverlay from "./ChatOverlay";
 
 export function FloatingChatButton() {
-  const router = useRouter();
+  const [visible, setVisible] = useState(false);
 
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => router.push("Chat")} // rota absoluta para fora das tabs
-    >
-      <Ionicons name="chatbubble-ellipses-outline" size={28} color="#fff" />
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setVisible(true)}
+      >
+        <Ionicons name="chatbubble-ellipses-outline" size={28} color="#fff" />
+      </TouchableOpacity>
+
+      <ChatOverlay visible={visible} onClose={() => setVisible(false)} />
+    </>
   );
 }
 

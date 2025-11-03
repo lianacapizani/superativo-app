@@ -38,7 +38,7 @@ assets/ → Imagens e ícones
 ### Área do Aluno
 - Visualizar pontuação, progresso e ranking  
 - **Ranking do aluno:** ver sua posição individual, ranking geral e da turma  
-- Chat de suporte: tirar dúvidas sobre o app, rankings, treinos personalizados e outros suportes  
+- Chat de suporte: tirar dúvidas sobre o app, rankings, treinos personalizados e outros suportes suportes.(Agora implementado com Ativito, assistente local).
 
 ### Ranking
 - Distinto para cada perfil:  
