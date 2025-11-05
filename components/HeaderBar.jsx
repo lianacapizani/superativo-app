@@ -1,12 +1,14 @@
-import { View, Image, TouchableOpacity, StyleSheet, StatusBar } from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet, StatusBar, Platform } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../app/styles/colors";
 
 export function HeaderBar() {
+  const isWeb = Platform.OS === "web";
+
   return (
     <View style={styles.safeContainer}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.primary500} />
-      <View style={styles.container}>
+      <View style={[styles.container, isWeb && styles.containerWeb]}>
         <Image
           source={require("../assets/images/logo-n.png")}
           style={styles.logo}
@@ -37,8 +39,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 60,
+    paddingTop: 60, 
     paddingBottom: 16,
+  },
+  containerWeb: {
+    paddingTop: 20, 
   },
   logo: {
     width: 110,
