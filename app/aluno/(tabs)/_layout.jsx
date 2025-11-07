@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { HeaderBar } from "../../../components/HeaderBar";
 import Colors from "../../styles/colors";
 import { FloatingChatButton } from "../../../components/FloatingChatButton";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Platform } from "react-native";
 import MenuItem from "../../../components/MenuItem";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 
@@ -91,7 +91,12 @@ export default function TabLayout() {
 
       {/* Painel de Configurações abaixo do header */}
 {showSettings && (
-  <View style={styles.panel}>
+  <View   style={[
+              styles.panel,
+              {
+                top: Platform.OS === "web" ? 76 : 116, //
+              },
+            ]}>
     <ScrollView contentContainerStyle={styles.menuList}>
       <MenuItem
         icon={<Feather name="user" size={20} color="#016DAD" />}
