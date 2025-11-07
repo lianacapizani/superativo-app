@@ -194,7 +194,7 @@ export default function ProfessorTurmas({ navigation }) {
                 <TouchableOpacity
                   style={[styles.btn, { backgroundColor: "#FC6E14" }]}
                   onPress={() =>
-                    navigation.navigate("PresencaTurma", { turmaId: turma.id })
+                    router.push(`/professor/${turma.id}/presenca`)
                   }
                 >
                   <MaterialCommunityIcons
