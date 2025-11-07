@@ -1,4 +1,5 @@
-import { Stack } from "expo-router";
+import { useEffect } from "react";
+import { Stack, router } from "expo-router";
 import {
   useFonts,
   Montserrat_100Thin,
@@ -23,6 +24,16 @@ export default function RootLayout() {
     MontserratSemiBold: Montserrat_600SemiBold,
     MontserratBold: Montserrat_700Bold,
   });
+
+  // 🚀 Pré-carregamento de rotas para navegação mais rápida
+  useEffect(() => {
+    // Prefetch de rotas principais do app
+    router.prefetch("/aluno/login");
+    router.prefetch("/professor/login");
+    router.prefetch("/aluno/(tabs)");
+    router.prefetch("/professor/(tabs)");
+    router.prefetch("/SignUp");
+  }, []);
 
   if (!fontsLoaded) {
     return <Text>Carregando fontes...</Text>;
