@@ -12,7 +12,6 @@ import {
   View
 } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import SocialLogin from '../components/SocialLogin';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import Colors from './styles/colors';
@@ -21,22 +20,37 @@ import { useRouter } from "expo-router";
 
 export default function Cadastro() {
   const router = useRouter();
+
+  // Campos do formulário
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [tipoUsuario, setTipoUsuario] = useState('');
+  const [codigoEscola, setCodigoEscola] = useState('');
   const [showSenha, setShowSenha] = useState(false);
   const [showConfirmarSenha, setShowConfirmarSenha] = useState(false);
 
   const handleCadastro = async () => {
-    if (!nome || !sobrenome || !email || !senha || !confirmarSenha) {
-      Alert.alert('Erro', 'Preencha todos os campos.');
+    if (!nome || !sobrenome || !email || !senha || !confirmarSenha || !tipoUsuario || !codigoEscola) {
+      Alert.alert('Erro', 'Preencha todos os campos obrigatórios.');
       return;
     }
 
     if (senha !== confirmarSenha) {
       Alert.alert('Erro', 'As senhas não coincidem.');
+      return;
+    }
+
+    // Aqui quando for validar o código/pin da escola no backend
+    // Exemplo fictício:
+    const codigosValidos = tipoUsuario === 'aluno'
+      ? ['ALUNO123', 'ALUNO456']
+      : ['PROF123', 'PROF456'];
+
+    if (!codigosValidos.includes(codigoEscola.trim())) {
+      Alert.alert('Erro', 'Código da escola inválido.');
       return;
     }
 
@@ -73,9 +87,34 @@ export default function Cadastro() {
         <Image source={require('../assets/images/logo.png')} style={styles.logo} />
         <Text style={styles.title}>Cadastro</Text>
 
+        {/* Tipo de Usuário */}
+        <Text style={styles.label}>Tipo de Usuário</Text>
+        <View style={styles.tipoContainer}>
+          <TouchableOpacity
+            style={[styles.tipoButton, tipoUsuario === 'aluno' && styles.tipoButtonSelected]}
+            onPress={() => setTipoUsuario('aluno')}
+          >
+            <Text style={[styles.tipoText,  tipoUsuario === 'aluno' && { color: '#fff' } ]}>Aluno</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tipoButton, tipoUsuario === 'professor' && styles.tipoButtonSelected]}
+            onPress={() => setTipoUsuario('professor')}
+          >
+            <Text style={[styles.tipoText,  tipoUsuario === 'professor' && { color: '#fff' }  ]}>Professor</Text>
+          </TouchableOpacity>
+        </View>
+
         <TextInput
           style={styles.input}
-          placeholder="Nome"
+          placeholder="Código da Escola / Turma *"
+          value={codigoEscola}
+          onChangeText={setCodigoEscola}
+          placeholderTextColor={Colors.neutral500}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Nome *"
           value={nome}
           onChangeText={setNome}
           placeholderTextColor={Colors.neutral500}
@@ -83,7 +122,7 @@ export default function Cadastro() {
 
         <TextInput
           style={styles.input}
-          placeholder="Sobrenome"
+          placeholder="Sobrenome *" 
           value={sobrenome}
           onChangeText={setSobrenome}
           placeholderTextColor={Colors.neutral500}
@@ -91,7 +130,7 @@ export default function Cadastro() {
 
         <TextInput
           style={styles.input}
-          placeholder="E-mail"
+          placeholder="E-mail *"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -103,7 +142,7 @@ export default function Cadastro() {
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.inputPassword}
-            placeholder="Senha"
+            placeholder="Senha *"
             value={senha}
             onChangeText={setSenha}
             secureTextEntry={!showSenha}
@@ -118,7 +157,7 @@ export default function Cadastro() {
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.inputPassword}
-            placeholder="Confirmar Senha"
+            placeholder="Confirmar Senha *"
             value={confirmarSenha}
             onChangeText={setConfirmarSenha}
             secureTextEntry={!showConfirmarSenha}
@@ -129,11 +168,9 @@ export default function Cadastro() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.replace("/")}>
+        <TouchableOpacity style={styles.button} onPress={handleCadastro}>
           <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
-
-        <SocialLogin />
 
         <TouchableOpacity onPress={() => router.push("/")}>
           <Text style={styles.signupLink}>Já possui conta? Voltar ao login</Text>
@@ -166,6 +203,37 @@ const styles = StyleSheet.create({
     fontFamily: Typography.semibold,
     marginBottom: 24,
     color: Colors.primary800,
+  },
+  label: {
+    width: '100%',
+    marginBottom: 8,
+    fontSize: 14,
+    fontFamily: Typography.medium,
+    color: Colors.neutral800,
+  },
+  tipoContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    width: '100%',
+    marginBottom: 12,
+    justifyContent: 'space-between',
+  },
+  tipoButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: Colors.neutral300,
+    borderRadius: 8,
+    marginHorizontal: 1,
+    alignItems: 'center',
+  },
+  tipoText: {
+    fontFamily: Typography.medium,
+    color: Colors.neutral900,
+  },
+  tipoButtonSelected: {
+    backgroundColor: Colors.primary500,
+    borderColor: Colors.primary500,
   },
   input: {
     width: '100%',

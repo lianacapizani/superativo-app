@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
+import * as LocalAuthentication from "expo-local-authentication";
 import Colors from "../styles/colors";
 import Typography from "../styles/typography";
 import { auth } from "../../services/firebase";
@@ -18,10 +19,56 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginScreen() {
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [showSenha, setShowSenha] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [biometrySupported, setBiometrySupported] = useState(false);
+  const [biometryType, setBiometryType] = useState(null);
+
+  useEffect(() => {
+    const checkBiometry = async () => {
+      const compatible = await LocalAuthentication.hasHardwareAsync();
+      const enrolled = await LocalAuthentication.isEnrolledAsync();
+      setBiometrySupported(compatible && enrolled);
+
+      if (compatible && enrolled) {
+        const types = await LocalAuthentication.supportedAuthenticationTypesAsync();
+
+        if (types.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
+          setBiometryType("Face ID");
+        } else if (types.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
+          setBiometryType("Touch ID");
+        }
+      }
+    };
+    checkBiometry();
+  }, []);
+
+  const handleBiometricAuth = async () => {
+    if (!biometrySupported) return;
+
+    try {
+      const promptMessage = biometryType
+        ? `Autentique-se com ${biometryType}`
+        : "Autentique-se";
+
+      const result = await LocalAuthentication.authenticateAsync({
+        promptMessage,
+        fallbackLabel: "Use sua senha",
+      });
+
+      if (result.success) {
+        router.push("/professor/(tabs)");
+      } else {
+        Alert.alert("Erro", "Autenticação biométrica falhou.");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Erro", "Ocorreu um erro na autenticação biométrica.");
+    }
+  };
 
   const handleLogin = async () => {
     if (!email || !senha) {
@@ -31,7 +78,7 @@ export default function LoginScreen() {
 
     try {
       await signInWithEmailAndPassword(auth, email, senha);
-      router.push("/(tabs)");
+      router.push("/professor/(tabs)");
     } catch (error) {
       console.error(error);
       const code = error.code || error?.nativeErrorCode || "unknown";
@@ -65,7 +112,6 @@ export default function LoginScreen() {
           autoCapitalize="none"
         />
 
-        {/* Senha */}
         <View style={styles.passwordContainer}>
           <TextInput
             placeholder="Senha"
@@ -76,7 +122,11 @@ export default function LoginScreen() {
             onChangeText={setSenha}
           />
           <TouchableOpacity onPress={() => setShowSenha(!showSenha)}>
-            <Ionicons name={showSenha ? "eye-off" : "eye"} size={24} color={Colors.neutral500} />
+            <Ionicons
+              name={showSenha ? "eye-off" : "eye"}
+              size={24}
+              color={Colors.neutral500}
+            />
           </TouchableOpacity>
         </View>
 
@@ -90,9 +140,21 @@ export default function LoginScreen() {
           <Text style={styles.checkboxLabel}>Lembrar-me</Text>
         </Pressable>
 
-        <TouchableOpacity style={styles.button}onPress={() => router.push("/professor/(tabs)")}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/professor/(tabs)")} >
           <Text style={styles.buttonText}>ENTRAR</Text>
         </TouchableOpacity>
+
+        {biometrySupported && (
+          <TouchableOpacity
+            style={[styles.button, styles.buttonBiometry]}
+            onPress={handleBiometricAuth}
+              activeOpacity={0.6}
+          >
+            <Text style={styles.buttonTextBiometry}>
+              Entrar com {biometryType || "biometria"}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         <View>
           <Text style={styles.signup}>Não possui conta?</Text>
@@ -101,7 +163,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.backButtonContainer}
-            onPress={() => router.replace("/")}
+            onPress={() => router.push("/")}
           >
             <Text style={styles.backButtonText}>Voltar</Text>
           </TouchableOpacity>
@@ -201,6 +263,22 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: Typography.semibold,
+  },
+  buttonBiometry: {
+    backgroundColor: "#fff",
+    borderColor: Colors.neutral300,
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginBottom: 14,
+    fontFamily: Typography.regular,
+    color: Colors.primary750,
+  },
+  buttonTextBiometry: {
+    color:Colors.primary750,
+    fontSize: 16,
+    fontFamily: Typography.medium,
+
   },
   signup: {
     marginTop: 40,
