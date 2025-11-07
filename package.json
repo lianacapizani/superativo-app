@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-     "build:web": "rm -rf dist && npx expo export --platform web"
+    "build:web": "rm -rf dist && npx expo export --platform web"
   },
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.4.2",
@@ -25,6 +25,7 @@
     "expo-haptics": "~15.0.7",
     "expo-image": "~3.0.8",
     "expo-linking": "~8.0.8",
+    "expo-local-authentication": "~17.0.7",
     "expo-router": "~6.0.6",
     "expo-splash-screen": "~31.0.10",
     "expo-status-bar": "~3.0.8",

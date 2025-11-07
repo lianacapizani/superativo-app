@@ -1,8 +1,8 @@
-import { View, Image, TouchableOpacity, StyleSheet, StatusBar, Platform } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image, Platform, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../app/styles/colors";
 
-export function HeaderBar() {
+export function HeaderBar({ onPressSettings }) {
   const isWeb = Platform.OS === "web";
 
   return (
@@ -21,7 +21,10 @@ export function HeaderBar() {
           <TouchableOpacity style={styles.iconButton}>
             <Ionicons name="notifications-outline" size={24} color={Colors.neutral50} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={onPressSettings} // 🔹 vem de fora agora
+          >
             <Ionicons name="settings-outline" size={24} color={Colors.neutral50} />
           </TouchableOpacity>
         </View>
@@ -39,11 +42,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 60, 
+    paddingTop: 60,
     paddingBottom: 16,
   },
   containerWeb: {
-    paddingTop: 20, 
+    paddingTop: 20,
   },
   logo: {
     width: 110,
