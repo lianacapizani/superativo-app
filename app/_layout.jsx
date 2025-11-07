@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Stack, router } from "expo-router";
+import { InteractionManager, Text } from "react-native";
 import {
   useFonts,
   Montserrat_100Thin,
@@ -9,9 +10,7 @@ import {
   Montserrat_600SemiBold,
   Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
-import { Text } from "react-native";
 
-// Ajuste global da fonte
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.style = { fontFamily: "MontserratRegular" };
 
@@ -25,14 +24,17 @@ export default function RootLayout() {
     MontserratBold: Montserrat_700Bold,
   });
 
-  // 🚀 Pré-carregamento de rotas para navegação mais rápida
   useEffect(() => {
-    // Prefetch de rotas principais do app
-    router.prefetch("/aluno/login");
-    router.prefetch("/professor/login");
-    router.prefetch("/aluno/(tabs)");
-    router.prefetch("/professor/(tabs)");
-    router.prefetch("/SignUp");
+    // 🔹 Só executa o prefetch depois que a interface já está pronta
+    const task = InteractionManager.runAfterInteractions(() => {
+      router.prefetch("/aluno/login");
+      router.prefetch("/professor/login");
+      router.prefetch("/aluno/(tabs)");
+      router.prefetch("/professor/(tabs)");
+      router.prefetch("/SignUp");
+    });
+
+    return () => task.cancel?.();
   }, []);
 
   if (!fontsLoaded) {
@@ -41,7 +43,6 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {/* As rotas abaixo só funcionam se os arquivos existirem em app/ */}
       <Stack.Screen name="index" />
       <Stack.Screen name="aluno/login" />
       <Stack.Screen name="professor/login" />
