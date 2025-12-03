@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Stack, router } from "expo-router";
 import { InteractionManager, Text } from "react-native";
+import { View, Platform, StyleSheet } from "react-native";
+
 import {
   useFonts,
   Montserrat_100Thin,
@@ -41,7 +43,14 @@ export default function RootLayout() {
     return <Text>Carregando fontes...</Text>;
   }
 
-  return (
+return (
+  <View
+    style={
+      Platform.OS === "web"
+        ? styles.mobileWrapper   // força layout de celular no web
+        : { flex: 1 }            // mobile normal
+    }
+  >
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="aluno/login" />
@@ -51,5 +60,17 @@ export default function RootLayout() {
       <Stack.Screen name="SignUp" />
       <Stack.Screen name="professor/[turmaId]" />
     </Stack>
-  );
+  </View>
+);
+
 }
+
+const styles = StyleSheet.create({
+  mobileWrapper: {
+    width: 390,           // largura padrão de iPhone
+    maxWidth: 390,
+    margin: "0 auto",     // centraliza no web
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
